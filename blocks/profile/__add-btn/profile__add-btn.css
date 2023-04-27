@@ -1,4 +1,6 @@
 .profile__add-btn{
+    background-color: black;
+    padding: 0;
     margin: auto 0 auto 0;
     border: 2px solid #FFFFFF;
     width: 150px;
