@@ -1,5 +1,9 @@
 
 .popup__input-form{
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    row-gap: 30px;
     margin: 54px auto 48px auto;
     width: 358px;
 }
