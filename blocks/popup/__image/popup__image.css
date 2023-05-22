@@ -1,9 +1,9 @@
-.popup__container{
+.popup__image{
     display: none;
 }
 
 @media screen and (max-width:880px) {
-    .popup__container{
+    .popup__image{
         display: none;
     }
 }

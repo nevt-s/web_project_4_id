@@ -1,5 +1,8 @@
 .elements__item{
+    position: absolute;
     display: flex;
     width: 246px;
     margin: 0 auto;
+    top: 282px;
+    left: 20px;
 }
