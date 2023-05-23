@@ -5,7 +5,7 @@
     left: 50%;
     transform: translate(-50%, -50%);
     max-width: 75vw;
-    max-height: 75vw;
+    max-height: 75vh;
     display: flex;
     flex-direction: column;
 }
@@ -13,6 +13,6 @@
 @media screen and (max-width:880px) {
     .popup__image_opened{
         max-width: 75vw;
-        max-height: 75vw;
+        max-height: 75vh;
     }
 }
