@@ -163,7 +163,10 @@ function elementsCall() {
 
       popupSelectImg.src = image.closest(".elements__image").src;
       popupSelectName.textContent = placename.textContent;
-      document.addEventListener("keydown",escapeButton)
+      popupImage.addEventListener("click", function(evt){
+        evt.stopPropagation();
+      })
+      document.addEventListener("keydown",escapeButton);
     });
   });
 }
