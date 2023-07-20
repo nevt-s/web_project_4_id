@@ -27,6 +27,7 @@
 @import url(../blocks/popup/__close-btn/popup__close-btn.css);
 @import url(../blocks/popup/__info/popup__info.css);
 @import url(../blocks/popup/__input-form/popup__input-form.css);
+@import url(../blocks/popup/__input-form-error/popup__input-form-error.css);
 @import url(../blocks/popup/__input/popup__input.css);
 @import url(../blocks/popup/__submit/popup__submit.css);
 @import url(../blocks/popup/__placename/popup__placename.css);
@@ -40,10 +41,6 @@
 
 .popup__input:invalid{
     border-color: #FF0000;
-}
-
-.form__input_error{
-    margin: 0;
 }
 
 .button_inactive{
