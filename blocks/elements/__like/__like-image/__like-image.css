@@ -4,4 +4,5 @@
 
 .elements__like-black{
     background-image: url(../../../../images/elements/black-like.png);
+    background-repeat: no-repeat;
 }
