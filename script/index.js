@@ -34,6 +34,7 @@ editButton.addEventListener("click", function() {
 
   name.value = profileName.textContent;
   about.value = profileAbout.textContent;
+
 });
 
 addButton.addEventListener("click", function() {
@@ -45,6 +46,20 @@ addButton.addEventListener("click", function() {
   document.getElementById("add").style.display="grid";
 });
 
+document.addEventListener("keydown", function(evt){
+  if(evt.keyCode == 27){
+    closePopup();
+  }
+});
+
+popupContain.addEventListener("click", function(evt){
+  evt.stopPropagation();
+})
+
+popup.addEventListener("click", function(evt){
+  closePopup();
+})
+
 popupCloseButton.forEach(item=>{
   item.addEventListener("click", closePopup)
 });
@@ -55,13 +70,13 @@ function closePopup(){
   popupContain.classList.remove('popup__container_opened');
   formEdit.reset();
   formAdd.reset();
-  const formError = formAdd.querySelectorAll('.form__input-error');
+  const formError = formAdd.querySelectorAll('.popup__input-form-error');
   formError.forEach((formElement) => {
     formElement.textContent = "";
   });
 
   
-  const formErrorEdit = formEdit.querySelectorAll('.form__input-error');
+  const formErrorEdit = formEdit.querySelectorAll('.popup__input-form-error');
   formErrorEdit.forEach((formElement) => {
     formElement.textContent = "";
   });
