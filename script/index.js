@@ -35,6 +35,8 @@ editButton.addEventListener("click", function() {
   name.value = profileName.textContent;
   about.value = profileAbout.textContent;
 
+  document.addEventListener("keydown", escapeButton);
+
 });
 
 addButton.addEventListener("click", function() {
@@ -44,13 +46,15 @@ addButton.addEventListener("click", function() {
 
   document.getElementById("edit").style.display="none";
   document.getElementById("add").style.display="grid";
+
+  document.addEventListener("keydown", escapeButton);
 });
 
-document.addEventListener("keydown", function(evt){
+function escapeButton(evt){
   if(evt.keyCode == 27){
     closePopup();
-  }
-});
+};
+}
 
 popupContain.addEventListener("click", function(evt){
   evt.stopPropagation();
@@ -65,6 +69,7 @@ popupCloseButton.forEach(item=>{
 });
 
 function closePopup(){
+  document.removeEventListener("keydown", escapeButton);
   popup.classList.remove('popup_opened');
   popupImage.classList.remove('popup__image_opened');
   popupContain.classList.remove('popup__container_opened');
@@ -158,6 +163,7 @@ function elementsCall() {
 
       popupSelectImg.src = image.closest(".elements__image").src;
       popupSelectName.textContent = placename.textContent;
+      document.addEventListener("keydown",escapeButton)
     });
   });
 }
