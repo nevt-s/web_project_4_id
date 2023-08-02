@@ -16,57 +16,60 @@
             <img src="./images/profile/avatar/profile__avatar.jpg" alt="avatar" class="profile__avatar">
             <div class="profile__info">
                 <div class="profile__info-detail">
-                    <h1 class="profile__name">Jacques Cousteau</h1>
-                    <button class="profile__edit-btn" type="button">
+                    <h1 class="profile__name" id="name-content">Jacques Cousteau</h1>
+                    <button class="profile__edit-btn" type="button" id="edit-btn">
                         <img src="./images/profile/edit-btn/profile__edit-btn.png" alt="edit-image" class="profile__edit-btn-image">
                     </button>
                 </div>
                 
-                <p class="profile__about-me">Penjelajah</p>
+                <p class="profile__about-me" id="about-content">Penjelajah</p>
             </div>
-            <button class="profile__add-btn" type="button">
+            <button class="profile__add-btn" type="button" id="add-btn">
                 <img src="./images/profile/add-btn/profile__add-btn.png" alt="add-image" class="profile__add-btn-image">
             </button>
         </section>
-        <section class="elements">
-            <template class="elements__template">
-                <article class="elements__card">
-                    <img src=" " alt="images" class="elements__image">
-                    <img src=" " alt="delete" class="elements__delete">
-                    <div class="elements__item">
-                        <h2 class="elements__place-name"></h2>
-                        <button class="elements__like"><img src=" " alt="like" class="elements__like-image"></button>
-                    </div>
-                </article>
-            </template>            
-        </section>
-        <div class="popup">
-            <div class="popup__container">
-                <button type="button" class="popup__close-btn">
+        
+        <template class="elements__template" id="template">
+            <article class="elements__card">
+                <img src="https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_yosemite.jpg" alt="images" class="elements__image" id="photo">
+                <img src="./images/elements/delete.png" alt="delete" class="elements__delete" id="delete">
+                <div class="elements__item">
+                    <h2 class="elements__place-name" id="placename">Lembah Yosemite</h2>
+                    <button class="elements__like" id="like">
+                        <img src="./images/elements/like.png" alt="like" class="elements__like-image">
+                    </button>
+                </div>
+            </article>
+        </template>
+
+        <section class="elements" id="holder"></section>
+        <div class="popup" id="popup">
+            <div class="popup__container" id="popup-form">
+                <button type="button" class="popup__close-btn" id="close-form">
                     <img src="./images/popup/close-icon.png" alt="close-icon" class="popup__close-btn-image">
                 </button>
-                <h2 class="popup__info">Edit profile</h2>
+                <h2 class="popup__info" id="form-title">Edit profile</h2>
                 <form class="popup__input-form" name="edit" id="edit">
                     <input type="text" class="popup__input popup__input-name" id="name-input" name="name" placeholder="Nama" minlength="2" maxlength="40" required>
                     <span class="popup__input-form-error name-input-error"></span>
                     <input type="text" class="popup__input popup__input-about" id="about-input" name="about" placeholder="Tentang saya" minlength="2" maxlength="200" required>
                     <span class="popup__input-form-error about-input-error"></span>
-                    <button type="submit" class="popup__submit">Save</button>
+                    <button type="submit" class="popup__submit button_inactive" disabled>Save</button>
                 </form>
                 <form class="popup__input-form" name="add" id="add">
                     <input type="text" class="popup__input popup__input-title" id="title-input" name="title" placeholder="Judul" minlength="2" maxlength="30" required>
                     <span class="popup__input-form-error title-input-error"></span>
                     <input type="url" class="popup__input popup__input-url" id="url-input" name="url" placeholder="Url Gambar" required>
                     <span class="popup__input-form-error url-input-error"></span>
-                    <button type="submit" class="popup__submit">Save</button>
+                    <button type="submit" class="popup__submit button_inactive" disabled>Save</button>
                 </form>
             </div>
-            <div class="popup__image">
-                <button type="button" class="popup__close-btn">
+            <div class="popup__image" id="popup-image">
+                <button type="button" class="popup__close-btn" id="close-image">
                     <img src="./images/popup/close-icon.png" alt="close-icon" class="popup__close-btn-image">
                 </button>
-                <img src="./" class="popup__place-image">
-                <p class="popup__placename"></p>
+                <img src="./" class="popup__place-image" id="place-image">
+                <p class="popup__placename" id="place-name"></p>
             </div>
         </div>
     </main>
@@ -74,5 +77,6 @@
         <p class="footer__text">© 2021 Around The U.S.</p>
     </footer>
     <script src="./script/index.js"></script>
+    <script src="./script/validation.js"></script>
 </body>
 </html>

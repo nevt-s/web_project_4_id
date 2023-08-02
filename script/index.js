@@ -1,107 +1,4 @@
-const container = document.querySelector('.container');
-
-const editButton = container.querySelector('.profile__edit-btn');
-const popup = container.querySelector('.popup');
-const popupCloseButton = container.querySelectorAll('.popup__close-btn');
-const popupTitle = container.querySelector('.popup__info');
-const profileName = container.querySelector('.profile__name');
-const profileAbout = container.querySelector('.profile__about-me');
-const addButton = container.querySelector('.profile__add-btn');
-const cardsContainer = container.querySelector('.elements');
-const popupContain = container.querySelector('.popup__container');
-const popupImage = container.querySelector('.popup__image');
-
-const formEdit = document.forms.edit;
-const name = formEdit.elements.name;
-const about = formEdit.elements.about;
-
-const formAdd = document.forms.add;
-const title = formAdd.elements.title;
-const url = formAdd.elements.url;
-
-const forms = document.querySelector(".popup__input-form");
-const formInput = forms.querySelector(".popup__input");
-const formError = forms.querySelector(`.${formInput.id}-error`);
-
-
-editButton.addEventListener("click", function() {
-  popupContain.classList.add('popup__container_opened');
-  popup.classList.add('popup_opened');
-  popupTitle.textContent = "Edit profile";
-
-  document.getElementById("add").style.display="none";
-  document.getElementById("edit").style.display="grid";
-
-  name.value = profileName.textContent;
-  about.value = profileAbout.textContent;
-
-  document.addEventListener("keydown", escapeButton);
-
-});
-
-addButton.addEventListener("click", function() {
-  popupContain.classList.add('popup__container_opened');
-  popup.classList.add('popup_opened');
-  popupTitle.textContent = "Tempat baru";
-
-  document.getElementById("edit").style.display="none";
-  document.getElementById("add").style.display="grid";
-
-  document.addEventListener("keydown", escapeButton);
-});
-
-function escapeButton(evt){
-  if(evt.keyCode == 27){
-    closePopup();
-};
-}
-
-popupContain.addEventListener("click", function(evt){
-  evt.stopPropagation();
-})
-
-popup.addEventListener("click", function(evt){
-  closePopup();
-})
-
-popupCloseButton.forEach(item=>{
-  item.addEventListener("click", closePopup)
-});
-
-function closePopup(){
-  document.removeEventListener("keydown", escapeButton);
-  popup.classList.remove('popup_opened');
-  popupImage.classList.remove('popup__image_opened');
-  popupContain.classList.remove('popup__container_opened');
-  formEdit.reset();
-  formAdd.reset();
-  const formError = formAdd.querySelectorAll('.popup__input-form-error');
-  formError.forEach((formElement) => {
-    formElement.textContent = "";
-  });
-
-  
-  const formErrorEdit = formEdit.querySelectorAll('.popup__input-form-error');
-  formErrorEdit.forEach((formElement) => {
-    formElement.textContent = "";
-  });
-}
-
-function SaveEdit(){  
-    profileName.textContent = name.value; 
-    profileAbout.textContent = about.value;
-    closePopup();
-}
-
-function SaveAdd(){
-      initialCards.unshift({name: title.value, link: url.value});
-      elementsRemove();
-      elementsCall();
-      closePopup();    
-      formAdd.reset();  
-}
-
-
+// array
 const initialCards = [
     {
       name: "Lembah Yosemite",
@@ -129,128 +26,202 @@ const initialCards = [
     }
   ];
 
-function elementsCall() {
-  initialCards.forEach((item)=>{
-    const cardTemplate = document.getElementsByClassName("elements__template")[0];
-    const cardArticle = document.querySelector(".elements");
-    const cloneCard = cardTemplate.content.cloneNode(true);
-    const image = cloneCard.querySelector(".elements__image");
-    const placename = cloneCard.querySelector(".elements__place-name");
-    const like = cloneCard.querySelector(".elements__like-image");
-    const likeButton = cloneCard.querySelector(".elements__like");
-    const deleteButton = cloneCard.querySelector(".elements__delete");
+//profile content
+const nameContent = document.getElementById('name-content');
+const aboutContent = document.getElementById('about-content');
+//card
+const holder = document.getElementById('holder');
+const template = document.getElementById('template');
+//popup
+const popup = document.getElementById('popup');
+//popup image
+const popupimage = document.getElementById('popup-image');
+const closeimage = document.getElementById('close-image');
+const placeImage = document.getElementById('place-image');
+//popup form
+const popupform = document.getElementById('popup-form');
+const closeform = document.getElementById('close-form');
+const formtitle = document.getElementById('form-title');
+//button
+const editButton = document.getElementById('edit-btn');
+const addButton = document.getElementById('add-btn');
+//form edit
+const formEdit = document.forms.edit;
+const name = formEdit.elements.name;
+const about = formEdit.elements.about;
+//form add
+const formAdd = document.forms.add;
+const title = formAdd.elements.title;
+const url = formAdd.elements.url;
 
-    image.src = item.link;
-    placename.textContent = item.name;
-    like.src = "./images/elements/like.png";
-    deleteButton.src = "./images/elements/delete.png";
-    cardArticle.append(cloneCard);
+render();
 
-    likeButton.addEventListener("click",(item)=>{
-      item.target.classList.toggle("elements__like-black");
-    });
+function render(){
+  for(i = 0; i < initialCards.length; i++){
 
-    deleteButton.addEventListener("click", () => {
-      const listItem = deleteButton.closest(".elements__card");
-      listItem.remove();
-    });
+    const { name, link } = initialCards[i];
+  
+    const clone = template.content.cloneNode(true);
+  
+    const placeName = clone.getElementById('placename');
+    placeName.innerText = name;
+  
+    const placePhoto = clone.getElementById('photo');
+    placePhoto.src = link;
+    placePhoto.addEventListener('click', () => OpenPhoto({
+      name,
+      link
+    }));
+  
+    const deleteButton = clone.getElementById('delete');  
+    deleteButton.addEventListener('click', () => deleteCard({
+      name,
+      link
+    }));
 
-    image.addEventListener("click", ()=>{
-      popup.classList.add("popup_opened");
-      popupImage.classList.add("popup__image_opened");
-      const popupSelectImg = document.querySelector(".popup__place-image");
-      const popupSelectName = document.querySelector(".popup__placename");
+    const likeButton = clone.getElementById('like');
+    likeButton.addEventListener('click', likeCard);
 
-      popupSelectImg.src = image.closest(".elements__image").src;
-      popupSelectName.textContent = placename.textContent;
-      popupImage.addEventListener("click", function(evt){
-        evt.stopPropagation();
-      })
-      document.addEventListener("keydown",escapeButton);
-    });
-  });
+    holder.appendChild(clone);
+  }
 }
 
-function elementsRemove(){
-  const removeElements = document.querySelectorAll(".elements__card");
+function clear(){
+  holder.innerHTML = '';
+}
 
-  removeElements.forEach((item) => {
-    item.remove()
+//card button
+function deleteCard(obj){
+  const { name, link } = obj;
+
+  const idxObj = initialCards.findIndex(object => {
+    return object.name === name;
   });
+  
+  initialCards.splice(idxObj, 1);
+
+  clear();
+  render();
+}
+
+function likeCard(item){  
+  item.target.classList.toggle("elements__like-black");
+}
+
+function OpenPhoto(obj){
+  popup.classList.add('popup_opened');
+  
+  popupimage.classList.add('popup__image_opened');
+
+  const { name, link } = obj;
+  placeImage.src = link;
+
+  const placeName = document.getElementById('place-name');
+  placeName.textContent = name;
+  
+  closeimage.addEventListener('click', closePopupImage)  
+  document.addEventListener("keydown", escapeButton);
+}
+
+//edit profile
+function editProfile(){
+  popupform.classList.add('popup__container_opened');
+  popup.classList.add('popup_opened');
+  formtitle.textContent="Edit profile";
+
+  document.getElementById("add").style.display="none";
+  document.getElementById("edit").style.display="grid";
+
+  name.value = nameContent.textContent;
+  about.value = aboutContent.textContent;
+
+  closeform.addEventListener('click', closeForm);
+  document.addEventListener("keydown", escapeButton);
 }
 
 formEdit.addEventListener("submit", function (evt) {
   evt.preventDefault();
-  SaveEdit();
+  saveProfile();
 })
+
+function saveProfile(){
+  nameContent.textContent = name.value;
+  aboutContent.textContent = about.value;
+  formAdd.reset();
+  formEdit.reset();
+  closeForm();
+}
+
+//add place
+function addPlace(){
+  popupform.classList.add('popup__container_opened');
+  popup.classList.add('popup_opened');
+  formtitle.textContent = "Tempat baru";
+
+  document.getElementById("edit").style.display="none";
+  document.getElementById("add").style.display="grid";
+
+  closeform.addEventListener('click', closeForm);
+  document.addEventListener("keydown", escapeButton);
+}
 
 formAdd.addEventListener("submit", function(evt){
   evt.preventDefault();
-  SaveAdd();
+  saveAdd();
 })
 
-elementsCall();
-
-const showInputError = (formElement, inputElement, errorMessage) => {
-  const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
-  inputElement.classList.add("form__input_type_error");
-  errorElement.textContent = errorMessage;
-  errorElement.classList.add("form__input-error_active");
-};
-
-const hideInputError = (formElement, inputElement) => {
-  const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
-  inputElement.classList.remove("form__input_type_error");
-  errorElement.classList.remove("form__input-error_active");
-  errorElement.textContent = "";
-};
-
-const checkInputValidity = (formElement, inputElement) => {
-  if (!inputElement.validity.valid) {
-    showInputError(formElement, inputElement, inputElement.validationMessage);
-
-  } else {
-    hideInputError(formElement, inputElement);
-  }
-};
-
-const hasInvalidInput = (inputList) => {
-  return inputList.some((inputElement) => {
-    return !inputElement.validity.valid;
-  });
-};
-
-
-const toggleButtonState = (inputList, buttonElement) => {
-  console.log(hasInvalidInput(inputList));
-  if (hasInvalidInput(inputList)) {
-    buttonElement.classList.add("button_inactive");
-  } else {
-    buttonElement.classList.remove("button_inactive");
-  }
-};
-
-const setEventListeners = (formElement) => {
-  const inputList = Array.from(formElement.querySelectorAll(".popup__input"));
-  const buttonElement = formElement.querySelector(".popup__submit");
-  inputList.forEach((inputElement) => {
-    inputElement.addEventListener("input", function () {
-      checkInputValidity(formElement, inputElement);
-      toggleButtonState(inputList, buttonElement);
-    });
-  });
-};
-
-const enableValidation = () =>{
-  const formList = Array.from(document.querySelectorAll(".popup__input-form"));
-  formList.forEach((formElement) => {
-  formElement.addEventListener("submit", (evt) => {
-    evt.preventDefault();
-  });
-
-    setEventListeners(formElement);
-});
+function saveAdd(){
+      initialCards.unshift({name: title.value, link: url.value});
+      clear();
+      render();
+      formAdd.reset();
+      formEdit.reset();
+      closeForm();
 }
 
-enableValidation();
+//close popup
+function closePopupImage(){
+  popup.classList.remove('popup_opened');
+  popupimage.classList.remove('popup__image_opened');
+  placeImage.src="";
+}
+
+function closeForm(){
+  popup.classList.remove('popup_opened');
+  popupform.classList.remove('popup__container_opened');
+
+  const clearError = Array.from(document.querySelectorAll('.popup__input-form-error'));
+  clearError.forEach((input) =>{
+    input.textContent = ""
+  })
+
+  formAdd.reset();
+  formEdit.reset();
+}
+
+//close by escape
+function escapeButton(evt){
+  if(evt.keyCode == 27){
+    closePopupImage();
+    closeForm();
+};
+}
+
+//close by click
+popupform.addEventListener("click", function(evt){
+  evt.stopPropagation();
+})
+
+popupimage.addEventListener("click", function(evt){
+  evt.stopPropagation();
+})
+
+popup.addEventListener("click", function(evt){
+  closeForm();
+  closePopupImage();
+})
+
+//event listener
+editButton.addEventListener('click',editProfile);
+addButton.addEventListener('click',addPlace);
 
