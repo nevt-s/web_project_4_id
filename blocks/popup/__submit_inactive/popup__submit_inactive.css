@@ -1,4 +1,4 @@
-.button_inactive{
+.popup__submit_inactive{
     cursor: default;
     width: 358px;
     height: 50px;
@@ -15,12 +15,12 @@
     opacity: 0.2;
 }
 
-.button_inactive:hover{
+.popup__submit_inactive:hover{
     opacity: 0.2;
 }
 
 @media screen and (max-width:880px) {
-    .button_inactive{
+    .popup__submit_inactive{
         width: 238px;
         height: 46px;
     }
