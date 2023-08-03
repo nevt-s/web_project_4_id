@@ -76,12 +76,15 @@ class Card {
   }
 
   doOpen(){
-    popup.classList.add('popup__opened');
+    popup.classList.add('popup_opened');
     popupimage.classList.add('popup__image_opened');
 
     placeImage.src = this.link;
     const placeName = document.getElementById('place-name');
     placeName.textContent = this.name;
+    
+    closeimage.addEventListener('click', closePopupImage)  
+    document.addEventListener("keydown", escapeButton);
   }
 
   addEventDelete(clone){
