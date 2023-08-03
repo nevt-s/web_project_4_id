@@ -54,6 +54,72 @@ const formAdd = document.forms.add;
 const title = formAdd.elements.title;
 const url = formAdd.elements.url;
 
+class Card {
+  constructor(name, link){
+    this.name = name;
+    this.link = link;
+  }
+
+  doDelete(){
+    const idxObj = initialCards.findIndex((obj) => {
+      return obj.name === this.name;
+    })
+
+    initialCards.splice(idxObj, 1);
+
+    clear();
+    render();
+  }
+
+  doLike(item){
+    item.target.classList.toggle("elements__like-black");
+  }
+
+  doOpen(){
+    popup.classList.add('popup__opened');
+    popupimage.classList.add('popup__image_opened');
+
+    placeImage.src = this.link;
+    const placeName = document.getElementById('place-name');
+    placeName.textContent = this.name;
+  }
+
+  addEventDelete(clone){
+    const deleteButton = clone.getElementById('delete');
+    deleteButton.addEventListener('click', () => this.doDelete());
+  }
+
+  addEventOpen(clone){
+    const clickPhoto = clone.getElementById('photo');
+    clickPhoto.addEventListener('click', () => this.doOpen());
+  }
+
+  addEventLike(clone){
+    const likeButton = clone.getElementById('like');
+    likeButton.addEventListener('click', this.doLike)
+  }
+
+
+  Place(clone, elementId, type, value){
+    const el = clone.getElementById(elementId);
+    el[type] = value;
+  }
+
+  render(template){
+    const clone = template.content.cloneNode(true);
+  
+    this.Place(clone, 'placename', 'innerText', this.name);
+    this.Place(clone, 'photo', 'src', this.link);
+
+    this.addEventDelete(clone);
+    this.addEventOpen(clone);
+    this.addEventLike(clone);
+    
+    return clone;
+
+  }
+}
+
 render();
 
 function render(){
@@ -61,28 +127,13 @@ function render(){
 
     const { name, link } = initialCards[i];
   
-    const clone = template.content.cloneNode(true);
-  
-    const placeName = clone.getElementById('placename');
-    placeName.innerText = name;
-  
-    const placePhoto = clone.getElementById('photo');
-    placePhoto.src = link;
-    placePhoto.addEventListener('click', () => OpenPhoto({
-      name,
-      link
-    }));
-  
-    const deleteButton = clone.getElementById('delete');  
-    deleteButton.addEventListener('click', () => deleteCard({
-      name,
-      link
-    }));
+    const card = new Card(
+      name, link
+    )
 
-    const likeButton = clone.getElementById('like');
-    likeButton.addEventListener('click', likeCard);
+    const cloned = card.render(template);
 
-    holder.appendChild(clone);
+    holder.appendChild(cloned);
   }
 }
 
