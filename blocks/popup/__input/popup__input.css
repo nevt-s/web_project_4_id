@@ -11,6 +11,10 @@
     border-left: 0;
     border-right: 0;
 }
+.popup__input:invalid{
+    border-color: #FF0000;
+}
+
 
 @media screen and (max-width:880px) {
     .popup__input{
