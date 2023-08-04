@@ -1,281 +1,285 @@
+
+import Card from './card.js'
+
 // array
-const initialCards = [
-    {
-      name: "Lembah Yosemite",
-      link: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_yosemite.jpg"
-    },
-    {
-      name: "Danau Louise",
-      link: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_lake-louise.jpg"
-    },
-    {
-      name: "Pegunungan Gundul",
-      link: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_bald-mountains.jpg"
-    },
-    {
-      name: "Gunung Latemar",
-      link: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_latemar.jpg"
-    },
-    {
-      name: "Taman Nasional Vanoise",
-      link: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_vanoise.jpg"
-    },
-    {
-      name: "Lago di Braies",
-      link: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_lago.jpg"
-    }
-  ];
+// const initialCards = [
+//     {
+//       name: "Lembah Yosemite",
+//       link: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_yosemite.jpg"
+//     },
+//     {
+//       name: "Danau Louise",
+//       link: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_lake-louise.jpg"
+//     },
+//     {
+//       name: "Pegunungan Gundul",
+//       link: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_bald-mountains.jpg"
+//     },
+//     {
+//       name: "Gunung Latemar",
+//       link: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_latemar.jpg"
+//     },
+//     {
+//       name: "Taman Nasional Vanoise",
+//       link: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_vanoise.jpg"
+//     },
+//     {
+//       name: "Lago di Braies",
+//       link: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_lago.jpg"
+//     }
+//   ];
 
 //profile content
-const nameContent = document.getElementById('name-content');
-const aboutContent = document.getElementById('about-content');
-//card
-const holder = document.getElementById('holder');
-const template = document.getElementById('template');
-//popup
-const popup = document.getElementById('popup');
-//popup image
-const popupimage = document.getElementById('popup-image');
-const closeimage = document.getElementById('close-image');
-const placeImage = document.getElementById('place-image');
-//popup form
-const popupform = document.getElementById('popup-form');
-const closeform = document.getElementById('close-form');
-const formtitle = document.getElementById('form-title');
-//button
-const editButton = document.getElementById('edit-btn');
-const addButton = document.getElementById('add-btn');
-//form edit
-const formEdit = document.forms.edit;
-const name = formEdit.elements.name;
-const about = formEdit.elements.about;
-//form add
-const formAdd = document.forms.add;
-const title = formAdd.elements.title;
-const url = formAdd.elements.url;
+// const nameContent = document.getElementById('name-content');
+// const aboutContent = document.getElementById('about-content');
+// //card
+// const holder = document.getElementById('holder');
+// const template = document.getElementById('template');
+// //popup
+// const popup = document.getElementById('popup');
+// //popup image
+// // const popupimage = document.getElementById('popup-image');
+// // const closeimage = document.getElementById('close-image');
+// // const placeImage = document.getElementById('place-image');
+// //popup form
+// const popupform = document.getElementById('popup-form');
+// const closeform = document.getElementById('close-form');
+// const formtitle = document.getElementById('form-title');
+// // //button
+// // const editButton = document.getElementById('edit-btn');
+// // const addButton = document.getElementById('add-btn');
+// //form edit
+// const formEdit = document.forms.edit;
+// const name = formEdit.elements.name;
+// const about = formEdit.elements.about;
+// //form add
+// const formAdd = document.forms.add;
+// const title = formAdd.elements.title;
+// const url = formAdd.elements.url;
 
-class Card {
-  constructor(name, link){
-    this.name = name;
-    this.link = link;
-  }
+//class Card
+// class Card {
+//   constructor(name, link){
+//     this.name = name;
+//     this.link = link;
+//   }
 
-  doDelete(){
-    const idxObj = initialCards.findIndex((obj) => {
-      return obj.name === this.name;
-    })
+//   _doDelete(){
+//     const idxObj = initialCards.findIndex((obj) => {
+//       return obj.name === this.name;
+//     })
 
-    initialCards.splice(idxObj, 1);
+//     initialCards.splice(idxObj, 1);
 
-    clear();
-    render();
-  }
+//     clear();
+//     render();
+//   }
 
-  doLike(item){
-    item.target.classList.toggle("elements__like-black");
-  }
+//   _doLike(item){
+//     item.target.classList.toggle("elements__like-black");
+//   }
 
-  doOpen(){
-    popup.classList.add('popup_opened');
-    popupimage.classList.add('popup__image_opened');
+//   _doOpen(){
+//     popup.classList.add('popup_opened');
+//     popupimage.classList.add('popup__image_opened');
 
-    placeImage.src = this.link;
-    const placeName = document.getElementById('place-name');
-    placeName.textContent = this.name;
+//     placeImage.src = this.link;
+//     const placeName = document.getElementById('place-name');
+//     placeName.textContent = this.name;
+
+//     closeimage.addEventListener('click', closePopupImage)  
+//     document.addEventListener("keydown", escapeButton);
+//   }
+
+//   addEventDelete(clone){
+//     const deleteButton = clone.getElementById('delete');
+//     deleteButton.addEventListener('click', () => this._doDelete());
+//   }
+
+//   addEventOpen(clone){
+//     const clickPhoto = clone.getElementById('photo');
+//     clickPhoto.addEventListener('click', () => this._doOpen());
+//   }
+
+//   addEventLike(clone){
+//     const likeButton = clone.getElementById('like');
+//     likeButton.addEventListener('click', this._doLike)
+//   }
+
+
+//   Place(clone, elementId, type, value){
+//     const el = clone.getElementById(elementId);
+//     el[type] = value;
+//   }
+
+//   render(template){
+//     const clone = template.content.cloneNode(true);
+  
+//     this.Place(clone, 'placename', 'innerText', this.name);
+//     this.Place(clone, 'photo', 'src', this.link);
+
+//     this.addEventDelete(clone);
+//     this.addEventOpen(clone);
+//     this.addEventLike(clone);
     
-    closeimage.addEventListener('click', closePopupImage)  
-    document.addEventListener("keydown", escapeButton);
-  }
+//     return clone;
 
-  addEventDelete(clone){
-    const deleteButton = clone.getElementById('delete');
-    deleteButton.addEventListener('click', () => this.doDelete());
-  }
+//   }
+// }
 
-  addEventOpen(clone){
-    const clickPhoto = clone.getElementById('photo');
-    clickPhoto.addEventListener('click', () => this.doOpen());
-  }
+// render();
 
-  addEventLike(clone){
-    const likeButton = clone.getElementById('like');
-    likeButton.addEventListener('click', this.doLike)
-  }
+// function render(){
+//   for(i = 0; i < initialCards.length; i++){
 
-
-  Place(clone, elementId, type, value){
-    const el = clone.getElementById(elementId);
-    el[type] = value;
-  }
-
-  render(template){
-    const clone = template.content.cloneNode(true);
+//     const { name, link } = initialCards[i];
   
-    this.Place(clone, 'placename', 'innerText', this.name);
-    this.Place(clone, 'photo', 'src', this.link);
+//     const card = new Card(
+//       name, link
+//     )
 
-    this.addEventDelete(clone);
-    this.addEventOpen(clone);
-    this.addEventLike(clone);
-    
-    return clone;
+//     const cloned = card.render(template);
 
-  }
-}
+//     holder.appendChild(cloned);
+//   }
+// }
 
-render();
+// function clear(){
+//   holder.innerHTML = '';
+// }
 
-function render(){
-  for(i = 0; i < initialCards.length; i++){
+// //card button
+// // function deleteCard(obj){
+// //   const { name, link } = obj;
 
-    const { name, link } = initialCards[i];
+// //   const idxObj = initialCards.findIndex(object => {
+// //     return object.name === name;
+// //   });
   
-    const card = new Card(
-      name, link
-    )
+// //   initialCards.splice(idxObj, 1);
 
-    const cloned = card.render(template);
+// //   clear();
+// //   render();
+// // }
 
-    holder.appendChild(cloned);
-  }
-}
+// // function likeCard(item){  
+// //   item.target.classList.toggle("elements__like-black");
+// // }
 
-function clear(){
-  holder.innerHTML = '';
-}
-
-//card button
-function deleteCard(obj){
-  const { name, link } = obj;
-
-  const idxObj = initialCards.findIndex(object => {
-    return object.name === name;
-  });
+// // function OpenPhoto(obj){
+// //   popup.classList.add('popup_opened');
   
-  initialCards.splice(idxObj, 1);
+// //   popupimage.classList.add('popup__image_opened');
 
-  clear();
-  render();
-}
+// //   const { name, link } = obj;
+// //   placeImage.src = link;
 
-function likeCard(item){  
-  item.target.classList.toggle("elements__like-black");
-}
-
-function OpenPhoto(obj){
-  popup.classList.add('popup_opened');
+// //   const placeName = document.getElementById('place-name');
+// //   placeName.textContent = name;
   
-  popupimage.classList.add('popup__image_opened');
+// //   closeimage.addEventListener('click', closePopupImage)  
+// //   document.addEventListener("keydown", escapeButton);
+// // }
 
-  const { name, link } = obj;
-  placeImage.src = link;
+// //edit profile
+// function editProfile(){
+//   popupform.classList.add('popup__container_opened');
+//   popup.classList.add('popup_opened');
+//   formtitle.textContent="Edit profile";
 
-  const placeName = document.getElementById('place-name');
-  placeName.textContent = name;
-  
-  closeimage.addEventListener('click', closePopupImage)  
-  document.addEventListener("keydown", escapeButton);
-}
+//   document.getElementById("add").style.display="none";
+//   document.getElementById("edit").style.display="grid";
 
-//edit profile
-function editProfile(){
-  popupform.classList.add('popup__container_opened');
-  popup.classList.add('popup_opened');
-  formtitle.textContent="Edit profile";
+//   name.value = nameContent.textContent;
+//   about.value = aboutContent.textContent;
 
-  document.getElementById("add").style.display="none";
-  document.getElementById("edit").style.display="grid";
+//   closeform.addEventListener('click', closeForm);
+//   document.addEventListener("keydown", escapeButton);
+// }
 
-  name.value = nameContent.textContent;
-  about.value = aboutContent.textContent;
+// formEdit.addEventListener("submit", function (evt) {
+//   evt.preventDefault();
+//   saveProfile();
+// })
 
-  closeform.addEventListener('click', closeForm);
-  document.addEventListener("keydown", escapeButton);
-}
+// function saveProfile(){
+//   nameContent.textContent = name.value;
+//   aboutContent.textContent = about.value;
+//   formAdd.reset();
+//   formEdit.reset();
+//   closeForm();
+// }
 
-formEdit.addEventListener("submit", function (evt) {
-  evt.preventDefault();
-  saveProfile();
-})
+// //add place
+// function addPlace(){
+//   popupform.classList.add('popup__container_opened');
+//   popup.classList.add('popup_opened');
+//   formtitle.textContent = "Tempat baru";
 
-function saveProfile(){
-  nameContent.textContent = name.value;
-  aboutContent.textContent = about.value;
-  formAdd.reset();
-  formEdit.reset();
-  closeForm();
-}
+//   document.getElementById("edit").style.display="none";
+//   document.getElementById("add").style.display="grid";
 
-//add place
-function addPlace(){
-  popupform.classList.add('popup__container_opened');
-  popup.classList.add('popup_opened');
-  formtitle.textContent = "Tempat baru";
+//   closeform.addEventListener('click', closeForm);
+//   document.addEventListener("keydown", escapeButton);
+// }
 
-  document.getElementById("edit").style.display="none";
-  document.getElementById("add").style.display="grid";
+// formAdd.addEventListener("submit", function(evt){
+//   evt.preventDefault();
+//   saveAdd();
+// })
 
-  closeform.addEventListener('click', closeForm);
-  document.addEventListener("keydown", escapeButton);
-}
-
-formAdd.addEventListener("submit", function(evt){
-  evt.preventDefault();
-  saveAdd();
-})
-
-function saveAdd(){
-      initialCards.unshift({name: title.value, link: url.value});
-      clear();
-      render();
-      formAdd.reset();
-      formEdit.reset();
-      closeForm();
-}
+// function saveAdd(){
+//       initialCards.unshift({name: title.value, link: url.value});
+//       clear();
+//       render();
+//       formAdd.reset();
+//       formEdit.reset();
+//       closeForm();
+// }
 
 //close popup
-function closePopupImage(){
-  popup.classList.remove('popup_opened');
-  popupimage.classList.remove('popup__image_opened');
-  placeImage.src="";
-}
+// function closePopupImage(){
+//   popup.classList.remove('popup_opened');
+//   popupimage.classList.remove('popup__image_opened');
+//   placeImage.src="";
+// }
 
-function closeForm(){
-  popup.classList.remove('popup_opened');
-  popupform.classList.remove('popup__container_opened');
+// function closeForm(){
+//   popup.classList.remove('popup_opened');
+//   popupform.classList.remove('popup__container_opened');
 
-  const clearError = Array.from(document.querySelectorAll('.popup__input-form-error'));
-  clearError.forEach((input) =>{
-    input.textContent = ""
-  })
+//   const clearError = Array.from(document.querySelectorAll('.popup__input-form-error'));
+//   clearError.forEach((input) =>{
+//     input.textContent = ""
+//   })
 
-  formAdd.reset();
-  formEdit.reset();
-}
+//   formAdd.reset();
+//   formEdit.reset();
+// }
 
 //close by escape
-function escapeButton(evt){
-  if(evt.keyCode == 27){
-    closePopupImage();
-    closeForm();
-};
-}
+// function escapeButton(evt){
+//   if(evt.keyCode == 27){
+//     closePopupImage();
+//     closeForm();
+// };
+// }
 
 //close by click
-popupform.addEventListener("click", function(evt){
-  evt.stopPropagation();
-})
+// popupform.addEventListener("click", function(evt){
+//   evt.stopPropagation();
+// })
 
-popupimage.addEventListener("click", function(evt){
-  evt.stopPropagation();
-})
+// popupimage.addEventListener("click", function(evt){
+//   evt.stopPropagation();
+// })
 
-popup.addEventListener("click", function(evt){
-  closeForm();
-  closePopupImage();
-})
+// popup.addEventListener("click", function(evt){
+//   closeForm();
+//   closePopupImage();
+// })
 
 //event listener
-editButton.addEventListener('click',editProfile);
-addButton.addEventListener('click',addPlace);
+// editButton.addEventListener('click',editProfile);
+// addButton.addEventListener('click',addPlace);
 
