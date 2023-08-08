@@ -1,7 +1,9 @@
   import { enableValidation } from "./FormValidator.js";
-  import { initialCards } from "./card.js";
-  import { render } from "./card.js";
-  import { clear } from "./card.js";
+  import { initialCards } from "./constants.js";
+  import Card from "./card.js";
+  import { Section } from "./section.js";
+import { Popup } from "./Popup.js";
+
   //profile content
   const nameContent = document.getElementById('name-content');
   const aboutContent = document.getElementById('about-content');
@@ -42,64 +44,6 @@ function closeForm(){
     // formEdit.reset();
   }
   
-  popupform.addEventListener("click", function(evt){
-    evt.stopPropagation();
-  })
-  
-  popup.addEventListener("click", function(evt){
-    closeForm();
-    closePopupImage();
-  })
-
-  //card button
-// function deleteCard(obj){
-//   const { name, link } = obj;
-
-//   const idxObj = initialCards.findIndex(object => {
-//     return object.name === name;
-//   });
-  
-//   initialCards.splice(idxObj, 1);
-
-//   clear();
-//   render();
-// }
-
-// function likeCard(item){  
-//   item.target.classList.toggle("elements__like-black");
-// }
-
-// function OpenPhoto(obj){
-//   popup.classList.add('popup_opened');
-  
-//   popupimage.classList.add('popup__image_opened');
-
-//   const { name, link } = obj;
-//   placeImage.src = link;
-
-//   const placeName = document.getElementById('place-name');
-//   placeName.textContent = name;
-  
-//   closeimage.addEventListener('click', closePopupImage)  
-//   document.addEventListener("keydown", escapeButton);
-// }
-
-//edit profile
-function editProfile(){
-  popupform.classList.add('popup__container_opened');
-  popup.classList.add('popup_opened');
-  formtitle.textContent="Edit profile";
-
-  document.getElementById("add").style.display="none";
-  document.getElementById("edit").style.display="grid";
-
-  name.value = nameContent.textContent;
-  about.value = aboutContent.textContent;
-
-  closeform.addEventListener('click', closeForm);
-  document.addEventListener("keydown", escapeButton);
-}
-
 formEdit.addEventListener("submit", function (evt) {
   evt.preventDefault();
   saveProfile();
@@ -113,18 +57,7 @@ function saveProfile(){
   closeForm();
 }
 
-//add place
-function addPlace(){
-  popupform.classList.add('popup__container_opened');
-  popup.classList.add('popup_opened');
-  formtitle.textContent = "Tempat baru";
 
-  document.getElementById("edit").style.display="none";
-  document.getElementById("add").style.display="grid";
-
-  closeform.addEventListener('click', closeForm);
-  document.addEventListener("keydown", escapeButton);
-}
 
 formAdd.addEventListener("submit", function(evt){
   evt.preventDefault();
@@ -132,12 +65,14 @@ formAdd.addEventListener("submit", function(evt){
 })
 
 function saveAdd(){
-      initialCards.unshift({name: title.value, link: url.value});
-      clear();
-      render();
-      formAdd.reset();
-      formEdit.reset();
-      closeForm();
+  const section = new Section({items : initialCards , renderer : Card}, holder);
+
+  initialCards.unshift({name: title.value, link: url.value});
+  section.Clear();
+  section.Renderer();
+  formAdd.reset();
+  formEdit.reset();
+  closeForm();
 }
 export function escapeButton(evt){
   if(evt.keyCode == 27){
@@ -145,6 +80,8 @@ export function escapeButton(evt){
     closeForm();
 };
 }
-  
-editButton.addEventListener('click',editProfile);
-addButton.addEventListener('click',addPlace);
+
+const testpopup = new Popup(popupform)
+editButton.addEventListener('click',() => testpopup.Open("edit"));
+addButton.addEventListener('click',() => testpopup.Open("add"));
+
