@@ -1,6 +1,7 @@
 import { initialCards } from './constants.js';
 import Card from './card.js'
 import { Section } from './section.js';
+import '../pages/index.css'
 
 const section = new Section({items : initialCards , renderer : Card}, holder);
 section.Renderer()
