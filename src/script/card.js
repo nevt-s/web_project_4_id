@@ -3,7 +3,7 @@ import { initialCards, popupimage, closeimage, placeImage } from "./constants.js
 import { Section } from "./section.js";
 import { Popup } from "./Popup.js";
 
-  export class Card {
+  export default class Card {
     constructor(name, link){
       this._name = name;
       this._link = link;
