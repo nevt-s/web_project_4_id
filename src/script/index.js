@@ -1,5 +1,5 @@
 import { initialCards } from './constants.js';
-import Card from './card.js'
+import { Card } from './card.js';
 import { Section } from './section.js';
 import '../pages/index.css'
 
