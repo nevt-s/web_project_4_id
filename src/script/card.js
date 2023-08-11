@@ -9,21 +9,10 @@ import { Popup } from "./Popup.js";
       this._link = link;
     }
 
-    Rerender(){
-      const section = new Section({items : initialCards , renderer : Card}, holder);
-      section.Clear();
-      section.Renderer();
-    }
-
     //button function
-    _doDelete(){
-      const idxObj = initialCards.findIndex((obj) => {
-        return obj.name === this._name;
-      })
-  
-      initialCards.splice(idxObj, 1);
-
-      this.Rerender();
+    _doDelete(item){
+      const section = new Section({items : initialCards , renderer : Card}, holder);
+      section.doDelete(item);
     }
   
     _doLike(item){
@@ -32,7 +21,7 @@ import { Popup } from "./Popup.js";
     
     addEventDelete(clone){
       const deleteButton = clone.getElementById('delete');
-      deleteButton.addEventListener('click', () => this._doDelete());
+      deleteButton.addEventListener('click', () => this._doDelete(this._name));
     }
   
     addEventOpen(clone){

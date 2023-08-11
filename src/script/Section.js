@@ -5,10 +5,24 @@ export class Section {
         this.classSelector = classSelector;
     }
 
+    //Detele function
+    doDelete(item){
+        const allelements = document.querySelectorAll('.elements__card')
+        const idxObj = this.items.findIndex((obj) => {
+            return obj.name === item;
+        })
+
+        allelements[idxObj].remove()
+
+        this.items.splice(idxObj, 1);
+        console.log(idxObj);
+
+    }
+
     //Render function dalam class
     Renderer(){
         this.items.forEach((item) => {
-    
+            
             const card = new this.renderer(
                 item.name, item.link
             )
