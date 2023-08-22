@@ -1,6 +1,6 @@
 import { escapeButton } from "./utils.js";
 import { initialCards, popupimage, closeimage, placeImage } from "./constants.js";
-import { Section } from "./section.js";
+import { Section } from "./Section.js";
 import { Popup } from "./Popup.js";
 
   export default class Card {
