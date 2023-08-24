@@ -2,7 +2,6 @@
     position: absolute;
     display: flex;
     width: 246px;
-    margin: 0 auto;
-    top: 282px;
+    bottom: 5px;
     left: 20px;
 }

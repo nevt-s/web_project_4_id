@@ -1,9 +1,10 @@
   import { enableValidation } from "./FormValidator.js";
-  import { initialCards } from "./constants.js";
+  import { initialCards, api } from "./constants.js";
   import Card from "./card.js";
   import { Section } from "./section.js";
   import { Popup } from "./Popup.js";
   import { UserInfo } from "./UserInfo.js";
+  import { addCard, callCard} from "./Api.js";
 
   //profile content
   const nameContent = document.getElementById('name-content');
@@ -23,7 +24,6 @@
 
   const testpopup = new Popup(popupform);
   const userinfo = new UserInfo();
-
   
 formEdit.addEventListener("submit", function (evt) {
   evt.preventDefault();
@@ -43,10 +43,11 @@ formAdd.addEventListener("submit", function(evt){
 
 function saveAdd(){
   const section = new Section({items : initialCards , renderer : Card}, holder);
-
-  initialCards.unshift({name: title.value, link: url.value});
+  addCard(title.value, url.value);
+  callCard();
+  // initialCards.unshift({name: title.value, link: url.value});
   section.Clear();
-  section.Renderer();
+  // section.Renderer();
   testpopup.Close();
 }
 

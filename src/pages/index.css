@@ -13,10 +13,12 @@
 @import url(../blocks/elements/elements.css);
 @import url(../blocks/elements/__card/elements__card.css);
 @import url(../blocks/elements/__image/elements__image.css);
+@import url(../blocks/elements//__id/elements__id.css);
 @import url(../blocks/elements/__delete/elements__delete.css);
 @import url(../blocks/elements/__item/elements__item.css);
 @import url(../blocks/elements/__place-name/elements__place-name.css);
 @import url(../blocks/elements/__like/elements__like.css);
+@import url(../blocks//elements//__like-count/elements__like-count.css);
 @import url(../blocks/elements/__like/__like-image/__like-image.css);
 @import url(../blocks/popup/popup.css);
 @import url(../blocks/popup/_opened/popup_opened.css);

@@ -1,10 +1,20 @@
 import { initialCards } from './constants.js';
 import Card from './card.js';
-import { Section } from './section.js';
-import '../pages/index.css'
+import '../pages/index.css';
+import { callCard } from './Api.js';
 
-const section = new Section({items : initialCards , renderer : Card}, holder);
-section.Renderer()
+callCard();
+
+  // api.getInitialCards()
+  // .then((result) => {
+  //   console.log("card OK")
+  //   console.log(result)
+  //   const section = new Section({items : result , renderer : Card}, holder);
+  //   section.Renderer()
+  // })
+  // .catch((err) => {
+  //   console.log(err); // log kesalahan ke konsol
+  // });
 
 
 //profile content

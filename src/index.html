@@ -12,7 +12,7 @@
     </header>
     <main class="container">
         <section class="profile">
-            <img src="<%=require('./images/profile/avatar/profile__avatar.jpg')%>" alt="avatar" class="profile__avatar">
+            <img src="<%=require('./images/profile/avatar/profile__avatar.jpg')%>" alt="avatar" class="profile__avatar" id="avatar-image">
             <div class="profile__info">
                 <div class="profile__info-detail">
                     <h1 class="profile__name" id="name-content">Jacques Cousteau</h1>
@@ -33,9 +33,11 @@
                 <img src="<%=require('./images/elements/card/__image/forest.jpg')%>" alt="images" class="elements__image" id="photo">
                 <img src="<%=require('./images/elements/delete.png')%>" alt="delete" class="elements__delete" id="delete">
                 <div class="elements__item">
+                    <p class="elements__id" id="id"></p>
                     <h2 class="elements__place-name" id="placename">Lembah Yosemite</h2>
                     <button class="elements__like" id="like">
                         <img src="<%=require('./images/elements/like.png')%>" alt="like" class="elements__like-image">
+                        <p class="elements__like-count" id="like-count">0</p>
                     </button>
                 </div>
             </article>

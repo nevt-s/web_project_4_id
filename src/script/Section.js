@@ -9,9 +9,8 @@ export class Section {
     doDelete(item){
         const allelements = document.querySelectorAll('.elements__card')
         const idxObj = this.items.findIndex((obj) => {
-            return obj.name === item;
+            return obj._id === item;
         })
-
         allelements[idxObj].remove()
 
         this.items.splice(idxObj, 1);
@@ -24,7 +23,7 @@ export class Section {
         this.items.forEach((item) => {
             
             const card = new this.renderer(
-                item.name, item.link
+                item.name, item.link, item._id, item.likes.length
             )
         
             const cloned = card.render(template);

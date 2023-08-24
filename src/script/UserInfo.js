@@ -1,4 +1,7 @@
-import { name, about, nameContent, aboutContent } from "./constants"
+import { name, about, nameContent, aboutContent, avatarImage} from "./constants";
+import { callUser } from "./Api";
+
+callUser();
 
 export class UserInfo{
     constructor(name, about){
@@ -14,5 +17,6 @@ export class UserInfo{
     setUserInfo(){
         nameContent.textContent = name.value;
         aboutContent.textContent = about.value;
+        callUser(name.value, about.value)
     }
 }

@@ -1,27 +1,44 @@
 import { escapeButton } from "./utils.js";
 import { initialCards, popupimage, closeimage, placeImage } from "./constants.js";
-import { Section } from "./Section.js";
+import { Section } from "./section.js";
 import { Popup } from "./Popup.js";
+import { deleteCard, LikeCard } from "./Api.js";
 
   export default class Card {
-    constructor(name, link){
+    constructor(name, link, _id, like){
       this._name = name;
       this._link = link;
+      this._id = _id;
+      this._like = like;
     }
 
     //button function
     _doDelete(item){
-      const section = new Section({items : initialCards , renderer : Card}, holder);
-      section.doDelete(item);
+      // api.getInitialCards()
+      // .then((result) => {
+      //   console.log("card OK")
+      //   console.log(result)
+      //   const section = new Section({items : result , renderer : Card}, holder);
+      //   section.doDelete(item);
+      // })
+      // .catch((err) => {
+      //   console.log(err); // log kesalahan ke konsol
+      // });
+
+      // const section = new Section({items : initialCards , renderer : Card}, holder);
+      // section.doDelete(item);
+      deleteCard(item);
     }
   
-    _doLike(item){
+    _doLike(item, id){
       item.target.classList.toggle("elements__like-black");
+      LikeCard(1);
     }
+
     
     addEventDelete(clone){
       const deleteButton = clone.getElementById('delete');
-      deleteButton.addEventListener('click', () => this._doDelete(this._name));
+      deleteButton.addEventListener('click', () => this._doDelete(this._id));
     }
   
     addEventOpen(clone){
@@ -32,7 +49,7 @@ import { Popup } from "./Popup.js";
   
     addEventLike(clone){
       const likeButton = clone.getElementById('like');
-      likeButton.addEventListener('click', this._doLike)
+      likeButton.addEventListener('click', (item) => this._doLike(item, this._id))
     }
   
   
@@ -46,6 +63,8 @@ import { Popup } from "./Popup.js";
     
       this.Place(clone, 'placename', 'innerText', this._name);
       this.Place(clone, 'photo', 'src', this._link);
+      this.Place(clone, 'id', 'innerText', this._id);
+      this.Place(clone, 'like-count', 'innerText', this._like);
   
       this.addEventDelete(clone);
       this.addEventOpen(clone);

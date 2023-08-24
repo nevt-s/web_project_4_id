@@ -28,6 +28,7 @@ export const initialCards = [
 //profile content
 export const nameContent = document.getElementById('name-content');
 export const aboutContent = document.getElementById('about-content');
+export const avatarImage = document.getElementById('avatar-image');
 export const popupimage = document.getElementById('popup-image');
 export const closeimage = document.getElementById('close-image');
 export const popup = document.getElementById('popup');
