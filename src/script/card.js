@@ -1,8 +1,8 @@
 import { escapeButton } from "./utils.js";
-import { initialCards, popupimage, closeimage, placeImage } from "./constants.js";
+import { initialCards, popupimage, closeimage, placeImage, likeButton, popupform } from "./constants.js";
 import { Section } from "./section.js";
 import { Popup } from "./Popup.js";
-import { deleteCard, LikeCard } from "./Api.js";
+import { deleteCard, LikeCard, UnlikeCard } from "./Api.js";
 
   export default class Card {
     constructor(name, link, _id, like){
@@ -32,19 +32,25 @@ import { deleteCard, LikeCard } from "./Api.js";
   
     _doLike(item, id){
       item.target.classList.toggle("elements__like-black");
-      LikeCard(1);
+      if(item.target.classList[1] == "elements__like-black"){
+        LikeCard(id);
+      }
+      else{
+        UnlikeCard(id);
+      }
     }
 
     
     addEventDelete(clone){
+      const testpopup = new Popup(popupform);
       const deleteButton = clone.getElementById('delete');
-      deleteButton.addEventListener('click', () => this._doDelete(this._id));
+      deleteButton.addEventListener('click',() => testpopup.Open("delete", this._id));
     }
   
     addEventOpen(clone){
       const testpopup = new Popup(popupimage);
       const clickPhoto = clone.getElementById('photo');
-      clickPhoto.addEventListener('click', () => testpopup.Open("image", this._link, this._name));
+      clickPhoto.addEventListener('click', () => testpopup.Open("image", this._id, this._link, this._name));
     }
   
     addEventLike(clone){

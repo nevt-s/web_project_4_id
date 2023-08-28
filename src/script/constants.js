@@ -34,6 +34,7 @@ export const closeimage = document.getElementById('close-image');
 export const popup = document.getElementById('popup');
 export const placeImage = document.getElementById('place-image');
 export const popupform = document.getElementById('popup-form');
+export const popupconfirm = document.getElementById('popup-confirm');
 export const closeform = document.getElementById('close-form');
 export const formtitle = document.getElementById('form-title');
 //button

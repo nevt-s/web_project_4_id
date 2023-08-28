@@ -1,6 +1,6 @@
 import { Section } from './section.js';
 import Card from './card.js';
-import { nameContent, aboutContent, avatarImage } from './constants.js';
+import { nameContent, aboutContent, avatarImage, popup } from './constants.js';
 
 export class Api {
     constructor(options) {
@@ -37,16 +37,23 @@ export class Api {
         }); 
     }
 
-    likeCard(){
-        return fetch("https://around.nomoreparties.co/v1/web_id_03/cards", {
-            method: "POST",
+    likeCard(id){
+        return fetch(`https://around.nomoreparties.co/v1/web_id_03/cards/likes/${id}`, {
+            method: "PUT",
             headers: {
                 authorization: "5f8bc2ce-9c96-4e75-869d-b995088f8715",
                 "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                likes : likes
-            }),
+            }
+        }); 
+    }
+
+    unlikeCard(id){
+        return fetch(`https://around.nomoreparties.co/v1/web_id_03/cards/likes/${id}`, {
+            method: "DELETE",
+            headers: {
+                authorization: "5f8bc2ce-9c96-4e75-869d-b995088f8715",
+                "Content-Type": "application/json"
+            }
         }); 
     }
 
@@ -127,6 +134,7 @@ export class Api {
     }
 
     export function deleteCard(item){
+        console.log(item)
         api.deleteSelectedCard(item)
         api.getInitialCards(item)
             .then((result) => {
@@ -134,6 +142,7 @@ export class Api {
                 console.log(result)
                 const section = new Section({items : result , renderer : Card}, holder);
                 section.doDelete(item);
+                popup.classList.remove('popup_opened');
             })
             .catch((err) => {
                 console.log(err); 
@@ -146,4 +155,8 @@ export class Api {
 
     export function LikeCard(id){
         api.likeCard(id);
+    }
+
+    export function UnlikeCard(id){
+        api.unlikeCard(id);
     }

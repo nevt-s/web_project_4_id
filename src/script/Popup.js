@@ -11,15 +11,17 @@ import {
 } from "./constants.js";
 import { PopupWithImage } from "./PopupWithImage.js";
 import { PopupWithForm } from "./PopupWithForm.js";
+import { PopupWithConfirmation } from "./PopupWithConfirmation.js";
 
 export class Popup{
     constructor(popupSelector){
         this.popupSelector = popupSelector;
     }
     
-    Open(evt, link, name){
+    Open(evt,id, link, name){
         const popupwithform = new PopupWithForm(this.popupSelector);
         const popupwithimage = new PopupWithImage(link, name, this.popupSelector);
+        // const popupwithconfirmation = new PopupWithConfirmation(this.popupSelector);
 
         if(evt === "add"){
             popupwithform.openPlaceform();
@@ -29,6 +31,9 @@ export class Popup{
         }
         else if(evt === "image"){            
             popupwithimage.OpenImage();
+        }
+        else if(evt === "delete"){
+            popupwithform.openConfirmation(id);        
         }
         
         this.setEventListener()
