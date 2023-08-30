@@ -31,13 +31,16 @@ import { deleteCard, LikeCard, UnlikeCard } from "./Api.js";
       deleteCard(item);
     }
   
-    _doLike(item, id, like){
+    _doLike(likecount, item, id){
       item.target.classList.toggle("elements__like-black");
+      
       if(item.target.classList[1] == "elements__like-black"){
         LikeCard(id);
+        likecount.textContent = this._like + 1
       }
       else{
         UnlikeCard(id);
+        likecount.textContent = this._like - 1
       }
     }
 
@@ -56,7 +59,8 @@ import { deleteCard, LikeCard, UnlikeCard } from "./Api.js";
   
     addEventLike(clone){
       const likeButton = clone.getElementById('like');
-      likeButton.addEventListener('click', (item) => this._doLike(item, this._id, this._like))
+      const likecount = clone.getElementById('like-count')
+      likeButton.addEventListener('click', (item) => this._doLike(likecount, item, this._id));
     }
   
   
@@ -88,8 +92,6 @@ import { deleteCard, LikeCard, UnlikeCard } from "./Api.js";
             return false
           }
       })
-
-      console.log(checkLike)
 
       this.addEventDelete(clone);
       this.addEventOpen(clone);

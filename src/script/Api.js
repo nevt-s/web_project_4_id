@@ -154,7 +154,7 @@ export class Api {
     }
 
     export function LikeCard(id){
-        api.likeCard(id);        
+        api.likeCard(id);
     }
 
     export function UnlikeCard(id){
