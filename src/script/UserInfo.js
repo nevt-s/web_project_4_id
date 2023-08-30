@@ -1,5 +1,5 @@
 import { name, about, nameContent, aboutContent, avatarImage} from "./constants";
-import { callUser } from "./Api";
+import { callUser, editUser } from "./Api";
 
 callUser();
 
@@ -17,6 +17,6 @@ export class UserInfo{
     setUserInfo(){
         nameContent.textContent = name.value;
         aboutContent.textContent = about.value;
-        callUser(name.value, about.value)
+        editUser(name.value, about.value)
     }
 }

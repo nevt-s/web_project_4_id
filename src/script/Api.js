@@ -121,16 +121,20 @@ export class Api {
         }
 
     export function callUser(){
-        api.getUserInformation()
-        .then((result) => {
-            console.log(result);
-            nameContent.textContent = result.name;
-            aboutContent.textContent = result.about;
-            avatarImage.src = result.avatar;
-        })
-            .catch((err) => {
-            console.log(err); // log kesalahan ke konsol
-        });
+            api.getUserInformation()
+            .then((result) => {
+                console.log(result);
+                nameContent.textContent = result.name;
+                aboutContent.textContent = result.about;
+                avatarImage.src = result.avatar;
+            })
+                .catch((err) => {
+                console.log(err); // log kesalahan ke konsol
+            });
+        }
+
+    export function editUser(name, about){
+        api.editUserInformation(name, about)
     }
 
     export function deleteCard(item){
@@ -150,9 +154,28 @@ export class Api {
     }
 
     export function addCard(name, link){
-        api.addNewCard(name, link);
+        // saveLoading(true);
+        setTimeout(saveLoading(true), 100000)
+        api.addNewCard(name, link)
+        .finally(() => {
+            saveLoading(false)
+        })
+        ;
     }
 
+    function saveLoading(isLoading){
+        const allsubmit = document.querySelectorAll('.popup__submit')
+        allsubmit.forEach(element => {
+            if(isLoading){
+                element.textContent = 'sedangkirim'
+            }
+            else{
+                element.textContent = 'save'
+            }
+            
+        });
+    }
+    
     export function LikeCard(id){
         api.likeCard(id);
     }
