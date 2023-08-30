@@ -36,11 +36,11 @@ import { deleteCard, LikeCard, UnlikeCard } from "./Api.js";
       
       if(item.target.classList[1] == "elements__like-black"){
         LikeCard(id);
-        likecount.textContent = this._like + 1
+        likecount.textContent = Number(likecount.textContent) + 1
       }
       else{
         UnlikeCard(id);
-        likecount.textContent = this._like - 1
+        likecount.textContent = Number(likecount.textContent) - 1
       }
     }
 
