@@ -11,7 +11,6 @@ import {
 } from "./constants.js";
 import { PopupWithImage } from "./PopupWithImage.js";
 import { PopupWithForm } from "./PopupWithForm.js";
-import { PopupWithConfirmation } from "./PopupWithConfirmation.js";
 
 export class Popup{
     constructor(popupSelector){

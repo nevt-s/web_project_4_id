@@ -1,15 +1,16 @@
 import { escapeButton } from "./utils.js";
-import { initialCards, popupimage, closeimage, placeImage, likeButton, popupform } from "./constants.js";
+import { initialCards, popupimage, closeimage, placeImage, popupform } from "./constants.js";
 import { Section } from "./section.js";
 import { Popup } from "./Popup.js";
 import { deleteCard, LikeCard, UnlikeCard } from "./Api.js";
 
   export default class Card {
-    constructor(name, link, _id, like){
+    constructor(name, link, _id, like, likes){
       this._name = name;
       this._link = link;
       this._id = _id;
       this._like = like;
+      this._likes = likes;
     }
 
     //button function
@@ -30,7 +31,7 @@ import { deleteCard, LikeCard, UnlikeCard } from "./Api.js";
       deleteCard(item);
     }
   
-    _doLike(item, id){
+    _doLike(item, id, like){
       item.target.classList.toggle("elements__like-black");
       if(item.target.classList[1] == "elements__like-black"){
         LikeCard(id);
@@ -55,7 +56,7 @@ import { deleteCard, LikeCard, UnlikeCard } from "./Api.js";
   
     addEventLike(clone){
       const likeButton = clone.getElementById('like');
-      likeButton.addEventListener('click', (item) => this._doLike(item, this._id))
+      likeButton.addEventListener('click', (item) => this._doLike(item, this._id, this._like))
     }
   
   
@@ -71,7 +72,25 @@ import { deleteCard, LikeCard, UnlikeCard } from "./Api.js";
       this.Place(clone, 'photo', 'src', this._link);
       this.Place(clone, 'id', 'innerText', this._id);
       this.Place(clone, 'like-count', 'innerText', this._like);
-  
+      
+      const likeButton = clone.querySelector('.elements__like-image');
+      
+      const checkLike = this._likes.some(function (Like){
+          if(Like._id.includes("467c63fe9a20ead4274652eb") == true){
+            likeButton.classList.add('elements__like-black')
+            return true
+          }
+
+          else if(Like._id.includes("467c63fe9a20ead4274652eb") == false){
+            return false
+          }
+          else{
+            return false
+          }
+      })
+
+      console.log(checkLike)
+
       this.addEventDelete(clone);
       this.addEventOpen(clone);
       this.addEventLike(clone);
