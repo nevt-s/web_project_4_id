@@ -160,19 +160,24 @@ export class Api {
     }
 
     export function deleteCard(item){
-        console.log(item)
         api.deleteSelectedCard(item)
-        api.getInitialCards(item)
+        .then(() => {
+            api.getInitialCards(item)
             .then((result) => {
                 console.log("card OK")
-                console.log(result)
+                console.log(item)
                 const section = new Section({items : result , renderer : Card}, holder);
-                section.doDelete(item);
+                // section.doDelete(item);
+                section.Clear();
+                recallCard();
                 popup.classList.remove('popup_opened');
             })
             .catch((err) => {
                 console.log(err); 
+                popup.classList.remove('popup_opened');
             });
+        })
+        
     }
 
     export function addCard(name, link){
