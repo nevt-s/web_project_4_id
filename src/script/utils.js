@@ -4,7 +4,7 @@
   import { Section } from "./section.js";
   import { Popup } from "./Popup.js";
   import { UserInfo } from "./UserInfo.js";
-  import { addCard, callCard} from "./Api.js";
+  import { addCard, callCard, recallCard} from "./Api.js";
 
   //profile content
   const nameContent = document.getElementById('name-content');
@@ -32,7 +32,6 @@ formEdit.addEventListener("submit", function (evt) {
 
 function saveProfile(){
   userinfo.setUserInfo();
-  testpopup.Close();
 }
 
 
@@ -44,11 +43,10 @@ formAdd.addEventListener("submit", function(evt){
 function saveAdd(){
   const section = new Section({items : initialCards , renderer : Card}, holder);
   addCard(title.value, url.value);
-  callCard();
   // initialCards.unshift({name: title.value, link: url.value});
   section.Clear();
+  recallCard();
   // section.Renderer();
-  testpopup.Close();
 }
 
 editButton.addEventListener('click',() => testpopup.Open("edit"));

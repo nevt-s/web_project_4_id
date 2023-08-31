@@ -1,6 +1,7 @@
 import { Section } from './section.js';
 import Card from './card.js';
-import { nameContent, aboutContent, avatarImage, popup } from './constants.js';
+import { nameContent, aboutContent, avatarImage, popup, popupform } from './constants.js';
+import { Popup } from './Popup.js';
 
 export class Api {
     constructor(options) {
@@ -120,6 +121,19 @@ export class Api {
             });
         }
 
+    export function recallCard(){
+        api.getInitialCards()
+        .then((result) => {
+            console.log("card OK")
+            console.log(result)
+            const section = new Section({items : result , renderer : Card}, holder);
+            section.Renderer()
+        })
+        .catch((err) => {
+            console.log(err); // log kesalahan ke konsol
+        });
+    }
+
     export function callUser(){
             api.getUserInformation()
             .then((result) => {
@@ -134,7 +148,15 @@ export class Api {
         }
 
     export function editUser(name, about){
+        saveLoading(true);
+
         api.editUserInformation(name, about)
+        .finally(() => {
+            saveLoading(false)
+            
+            const testpopup = new Popup(popupform);
+            testpopup.Close();
+        })
     }
 
     export function deleteCard(item){
@@ -154,11 +176,13 @@ export class Api {
     }
 
     export function addCard(name, link){
-        // saveLoading(true);
-        setTimeout(saveLoading(true), 100000)
+        saveLoading(true);
         api.addNewCard(name, link)
         .finally(() => {
             saveLoading(false)
+            
+            const testpopup = new Popup(popupform);
+            testpopup.Close();
         })
         ;
     }
@@ -167,12 +191,11 @@ export class Api {
         const allsubmit = document.querySelectorAll('.popup__submit')
         allsubmit.forEach(element => {
             if(isLoading){
-                element.textContent = 'sedangkirim'
+                element.textContent = 'Mengirim....'
             }
             else{
-                element.textContent = 'save'
+                element.textContent = 'Save'
             }
-            
         });
     }
     
