@@ -23,7 +23,7 @@ export class Section {
         this.items.forEach((item) => {
             
             const card = new this.renderer(
-                item.name, item.link, item._id, item.likes.length, item.likes
+                item.name, item.link, item._id, item.likes.length, item.likes, item.owner._id
             )
         
             const cloned = card.render(template);

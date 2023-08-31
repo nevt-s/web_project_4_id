@@ -5,29 +5,17 @@ import { Popup } from "./Popup.js";
 import { deleteCard, LikeCard, UnlikeCard } from "./Api.js";
 
   export default class Card {
-    constructor(name, link, _id, like, likes){
+    constructor(name, link, _id, like, likes, owner_id){
       this._name = name;
       this._link = link;
       this._id = _id;
       this._like = like;
       this._likes = likes;
+      this.owner_id = owner_id;
     }
 
     //button function
     _doDelete(item){
-      // api.getInitialCards()
-      // .then((result) => {
-      //   console.log("card OK")
-      //   console.log(result)
-      //   const section = new Section({items : result , renderer : Card}, holder);
-      //   section.doDelete(item);
-      // })
-      // .catch((err) => {
-      //   console.log(err); // log kesalahan ke konsol
-      // });
-
-      // const section = new Section({items : initialCards , renderer : Card}, holder);
-      // section.doDelete(item);
       deleteCard(item);
     }
   
@@ -82,16 +70,13 @@ import { deleteCard, LikeCard, UnlikeCard } from "./Api.js";
       const checkLike = this._likes.some(function (Like){
           if(Like._id.includes("467c63fe9a20ead4274652eb") == true){
             likeButton.classList.add('elements__like-black')
-            return true
-          }
-
-          else if(Like._id.includes("467c63fe9a20ead4274652eb") == false){
-            return false
           }
           else{
             return false
           }
       })
+
+      this.checkOwner(clone, this.owner_id);
 
       this.addEventDelete(clone);
       this.addEventOpen(clone);
@@ -99,5 +84,15 @@ import { deleteCard, LikeCard, UnlikeCard } from "./Api.js";
       
       return clone;
   
+    }
+
+    checkOwner(clone, owner_id){
+      const deleteButton = clone.getElementById('delete');
+      if(owner_id == '467c63fe9a20ead4274652eb'){
+        deleteButton.classList.add('elements__delete-show');
+      }
+      else{
+        deleteButton.classList.remove('elements__delete-show');
+      }  
     }
   }

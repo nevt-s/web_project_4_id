@@ -1,5 +1,5 @@
-.elements__delete{
-    display: none;
+.elements__delete-show{
+    display: block;
     position: relative;
     width: 20px;
     height: 20px;
