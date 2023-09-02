@@ -41,12 +41,7 @@ formAdd.addEventListener("submit", function(evt){
 })
 
 function saveAdd(){
-  const section = new Section({items : initialCards , renderer : Card}, holder);
-  addCard(title.value, url.value);
-  // initialCards.unshift({name: title.value, link: url.value});
-  section.Clear();
-  recallCard();
-  // section.Renderer();
+  addCard(title.value, url.value)
 }
 
 editButton.addEventListener('click',() => testpopup.Open("edit"));

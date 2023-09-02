@@ -114,25 +114,13 @@ export class Api {
                 console.log("card OK")
                 console.log(result)
                 const section = new Section({items : result , renderer : Card}, holder);
+                section.Clear();
                 section.Renderer()
             })
             .catch((err) => {
                 console.log(err); // log kesalahan ke konsol
             });
         }
-
-    export function recallCard(){
-        api.getInitialCards()
-        .then((result) => {
-            console.log("card OK")
-            console.log(result)
-            const section = new Section({items : result , renderer : Card}, holder);
-            section.Renderer()
-        })
-        .catch((err) => {
-            console.log(err); // log kesalahan ke konsol
-        });
-    }
 
     export function callUser(){
             api.getUserInformation()
@@ -166,10 +154,7 @@ export class Api {
             .then((result) => {
                 console.log("card OK")
                 console.log(item)
-                const section = new Section({items : result , renderer : Card}, holder);
-                // section.doDelete(item);
-                section.Clear();
-                recallCard();
+                callCard();
                 popup.classList.remove('popup_opened');
             })
             .catch((err) => {
@@ -183,20 +168,22 @@ export class Api {
     export function addCard(name, link){
         saveLoading(true);
         api.addNewCard(name, link)
+        .then (() => {
+            callCard();
+        })
         .finally(() => {
             saveLoading(false)
             
             const testpopup = new Popup(popupform);
             testpopup.Close();
-        })
-        ;
+        });
     }
 
     function saveLoading(isLoading){
         const allsubmit = document.querySelectorAll('.popup__submit')
         allsubmit.forEach(element => {
             if(isLoading){
-                element.textContent = 'Mengirim....'
+                element.textContent = 'Menyimpan...'
             }
             else{
                 element.textContent = 'Save'
