@@ -48,3 +48,8 @@ export const about = formEdit.elements.about;
 export const formAdd = document.forms.add;
 export const title = formAdd.elements.title;
 export const url = formAdd.elements.url;
+//form avatar
+export const formAvatar = document.forms.avatar;
+export const avatarElement = document.getElementById('avatar-url');
+
+

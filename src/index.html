@@ -12,7 +12,13 @@
     </header>
     <main class="container">
         <section class="profile">
-            <img src="<%=require('./images/profile/avatar/profile__avatar.jpg')%>" alt="avatar" class="profile__avatar" id="avatar-image">
+            <div class="profile__avatar">
+                <div class="profile__avatar-edit-button" id="avatar-edit" >
+                    <div class="profile__avatar-edit-bg"></div>
+                    <img alt="edit" class="profile__avatar-edit"src="<%=require('./images/profile/avatar/profile__avatar-edit.png')%>">                       
+                </div>
+                <img alt="avatar" class="profile__avatar" id="avatar-image">  
+            </div>
             <div class="profile__info">
                 <div class="profile__info-detail">
                     <h1 class="profile__name" id="name-content">Jacques Cousteau</h1>
@@ -62,6 +68,11 @@
                     <span class="popup__input-form-error title-input-error"></span>
                     <input type="url" class="popup__input popup__input-url" id="url-input" name="url" placeholder="Url Gambar" required>
                     <span class="popup__input-form-error url-input-error"></span>
+                    <button type="submit" class="popup__submit popup__submit_inactive" disabled>Save</button>
+                </form>                
+                <form class="popup__input-form" name="avatar" id="profile-avatar">
+                    <input type="url" class="popup__input popup__input-url" id="avatar-url" name="avatar-url" placeholder="Url Gambar" required>
+                    <span class="popup__input-form-error avatar-url-error"></span>
                     <button type="submit" class="popup__submit popup__submit_inactive" disabled>Save</button>
                 </form>
                 <div class="popup__confirmation" id="confirm">

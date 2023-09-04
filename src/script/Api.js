@@ -97,6 +97,19 @@ export class Api {
         }); 
     }
 
+    changeProfileAvatar(avatarurl){
+        return fetch("https://around.nomoreparties.co/v1/web_id_03/users/me/avatar", {
+            method: "PATCH",
+            headers: {
+                authorization: "5f8bc2ce-9c96-4e75-869d-b995088f8715",
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                avatar: avatarurl
+            })
+        }); 
+    }
+
   }
   
   
@@ -150,18 +163,12 @@ export class Api {
     export function deleteCard(item){
         api.deleteSelectedCard(item)
         .then(() => {
-            api.getInitialCards(item)
-            .then((result) => {
-                console.log("card OK")
-                console.log(item)
-                callCard();
-                popup.classList.remove('popup_opened');
-            })
-            .catch((err) => {
-                console.log(err); 
-                popup.classList.remove('popup_opened');
-            });
+            callCard();
+            popup.classList.remove('popup_opened');
         })
+        .catch((err) => {
+            console.log(err); 
+        });
         
     }
 
@@ -197,4 +204,18 @@ export class Api {
 
     export function UnlikeCard(id){
         api.unlikeCard(id);
+    }
+
+    export function ChangeProfileAvatar(url){
+        saveLoading(true);
+        api.changeProfileAvatar(url)
+        .then (() => {
+            callUser();
+        })
+        .finally(() => {
+            saveLoading(false)
+            
+            const testpopup = new Popup(popupform);
+            testpopup.Close();
+        });
     }

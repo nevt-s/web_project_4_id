@@ -4,6 +4,7 @@ const checkInputValidity = (formElement, inputElement) => {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
   //show error
   if(!inputElement.validity.valid){
+    console.log(inputElement.classList)
     inputElement.classList.add(".form__input_type_error");
     errorElement.textContent = inputElement.validationMessage;
     errorElement.classList.add("form__input-error_active");

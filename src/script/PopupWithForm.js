@@ -1,6 +1,6 @@
 import { popup, formtitle, name, about, nameContent, aboutContent } from "./constants";
 import { UserInfo } from "./UserInfo";
-import { deleteCard } from "./Api";
+import { deleteCard, ChangeProfileAvatar } from "./Api";
 
 export class PopupWithForm{
     constructor(popupSelector){
@@ -18,6 +18,7 @@ export class PopupWithForm{
         document.getElementById("add").style.display="none";
         document.getElementById("edit").style.display="grid";
         document.getElementById("confirm").style.display="none";
+        document.getElementById("profile-avatar").style.display="none";
 
         userinfo.getUserInfo();
     }
@@ -30,6 +31,8 @@ export class PopupWithForm{
         document.getElementById("edit").style.display="none";
         document.getElementById("add").style.display="grid";
         document.getElementById("confirm").style.display="none";
+        document.getElementById("profile-avatar").style.display="none";
+
     }
 
     openConfirmation(item){
@@ -38,6 +41,7 @@ export class PopupWithForm{
         formtitle.textContent = "Apakah anda yakin?";
 
         const confirm = document.getElementById("confirm-submit");
+        confirm.textContent = 'Ya';
         
         confirm.classList.remove("popup__submit_inactive");
         confirm.disabled = false;
@@ -45,6 +49,19 @@ export class PopupWithForm{
         document.getElementById("edit").style.display="none";
         document.getElementById("add").style.display="none";
         document.getElementById("confirm").style.display="grid";
+        document.getElementById("profile-avatar").style.display="none";
+
+    }
+
+    OpenChangeAvatar(){
+        popup.classList.add('popup_opened');
+        this.popupSelector.classList.add('popup__confirmation_opened');
+        formtitle.textContent = "Ubah foto profil";
+        
+        document.getElementById("edit").style.display="none";
+        document.getElementById("add").style.display="none";
+        document.getElementById("confirm").style.display="none";
+        document.getElementById("profile-avatar").style.display="grid";
 
 
     }

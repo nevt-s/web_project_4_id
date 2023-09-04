@@ -34,6 +34,9 @@ export class Popup{
         else if(evt === "delete"){
             popupwithform.openConfirmation(id);        
         }
+        else if(evt === "editAvatar"){
+            popupwithform.OpenChangeAvatar();   
+        }
         
         this.setEventListener()
     }

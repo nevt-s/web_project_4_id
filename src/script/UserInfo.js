@@ -9,6 +9,7 @@ export class UserInfo{
         this.about = about
     }
 
+
     getUserInfo(){
         name.value = this.name;
         about.value = this.about;

@@ -1,8 +1,37 @@
 .profile__avatar{
+    position: relative;
     border-radius: 50%;
     object-fit: cover;
     width: 120px;
     height: 120px;
+    z-index: 0;
+}
+
+.profile__avatar:hover .profile__avatar-edit-button{
+    display: block;
+}
+
+.profile__avatar-edit-button{
+    display: none;
+    cursor: pointer;
+}
+
+.profile__avatar-edit{
+    position: absolute;
+    left: 45px;
+    top: 45px;
+    z-index: 2;
+}
+
+.profile__avatar-edit-bg{
+    position: absolute;
+    opacity: 0.8;
+    left: 0;
+    top: 0;
+    width: 120px;
+    height: 120px;
+    background-color: #000000;
+    z-index: 1;
 }
 
 @media screen and (max-width:880px) {
